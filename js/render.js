@@ -62,17 +62,18 @@
   function renderDisciplines() {
     const st = $('#discStage'); if (!st) return;
     const arts = [ART.road, ART.mtb, ART.tt];
-    st.innerHTML = (Store.get('disciplines') || []).map((d, i) => `
-      <article class="disc${d.image ? ' has-img' : ''}" data-title="${esc(d.title)}">
-        ${d.image ? `<div class="disc__bg" aria-hidden="true"><img src="${esc(d.image)}" alt="" loading="lazy"></div>` : ''}
-        <div class="disc__art" aria-hidden="true">${arts[i % 3]}</div>
-        <span class="disc__tag">${esc(d.tag)} / ${String((Store.get('disciplines') || []).length).padStart(2, '0')}</span>
-        <h3 class="disc__title">${esc(d.title)}</h3>
-        <p class="disc__text">${esc(d.text)}</p>
-      </article>`).join('');
-    const dots = $('#discDots'); if (dots) dots.innerHTML = (Store.get('disciplines') || []).map((_, i) => `<i class="${i ? '' : 'is-active'}"></i>`).join('');
-    const big = $('#discBig'); const first = (Store.get('disciplines') || [])[0];
-    if (big && first) big.textContent = first.title;
+    const list = Store.get('disciplines') || [];
+    st.style.setProperty('--n', Math.max(1, Math.min(list.length, 3)));
+    st.innerHTML = list.map((d, i) => `
+      <div class="disc-wrap reveal" style="--d:${(i % 3) * 0.1}s">
+        <article class="disc${d.image ? ' has-img' : ''}" data-tilt="8">
+          ${d.image ? `<div class="disc__bg" aria-hidden="true"><img src="${esc(d.image)}" alt="" loading="lazy"></div>` : ''}
+          <div class="disc__art" aria-hidden="true">${arts[i % 3]}</div>
+          <span class="disc__tag">${esc(d.tag)} / ${String(list.length).padStart(2, '0')}</span>
+          <h3 class="disc__title">${esc(d.title)}</h3>
+          <p class="disc__text">${esc(d.text)}</p>
+        </article>
+      </div>`).join('');
   }
 
   function renderProcess() {

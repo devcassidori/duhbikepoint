@@ -241,6 +241,60 @@ window.Effects = (function () {
     layout();
   }
 
+  /* ---------- Como funciona: carrossel automático (pausa com o mouse em cima) ---------- */
+  function initProcessCarousel() {
+    const root = $('#pcar'), track = $('#processTrack'); if (!root || !track) return;
+    const steps = $$('.step', track); const n = steps.length; if (!n) return;
+    const dotsBox = $('#pcarDots'), bar = $('#processBar');
+    const DELAY = 4000;
+    let index = 0, per = 1, paused = false, inView = false, elapsed = 0, last = performance.now();
+    const maxIndex = () => Math.max(0, n - per);
+    function buildDots() {
+      const pages = maxIndex() + 1;
+      dotsBox.innerHTML = Array.from({ length: pages }, (_, i) => `<button type="button" role="tab" aria-label="Etapa ${i + 1}" aria-selected="${i === index}"></button>`).join('');
+      $$('button', dotsBox).forEach((b, i) => b.addEventListener('click', () => go(i, true)));
+      dotsBox.hidden = pages < 2; $('#pcarPrev').hidden = $('#pcarNext').hidden = pages < 2;
+    }
+    function layout() {
+      per = parseInt(getComputedStyle(root).getPropertyValue('--per')) || 1;
+      if (index > maxIndex()) index = maxIndex();
+      buildDots(); go(index);
+    }
+    function go(i, user) {
+      const m = maxIndex(); index = i > m ? 0 : i < 0 ? m : i;
+      track.style.transform = `translate3d(${-steps[index].offsetLeft}px,0,0)`;
+      steps.forEach((st, k) => { st.classList.toggle('is-active', k === index); st.setAttribute('aria-hidden', String(k < index || k >= index + per)); });
+      $$('button', dotsBox).forEach((d, k) => d.setAttribute('aria-selected', String(k === index)));
+      elapsed = 0; if (user) last = performance.now();
+    }
+    const setPaused = (v) => { paused = v; root.classList.toggle('is-paused', v); };
+    root.addEventListener('mouseenter', () => setPaused(true));
+    root.addEventListener('mouseleave', () => setPaused(false));
+    root.addEventListener('focusin', () => setPaused(true));
+    root.addEventListener('focusout', () => setPaused(false));
+    $('#pcarPrev').addEventListener('click', () => go(index - 1, true));
+    $('#pcarNext').addEventListener('click', () => go(index + 1, true));
+    root.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') go(index - 1, true); if (e.key === 'ArrowRight') go(index + 1, true); });
+    // arraste/toque
+    let sx = 0, sy = 0, down = false;
+    track.addEventListener('pointerdown', (e) => { down = true; sx = e.clientX; sy = e.clientY; if (e.pointerType !== 'mouse') setPaused(true); });
+    addEventListener('pointerup', (e) => {
+      if (!down) return; down = false;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1), true);
+      if (e.pointerType !== 'mouse') setTimeout(() => setPaused(false), 2500);
+    });
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { threshold: 0.3 }).observe(root);
+    (function loop(now) {
+      const dt = now - last; last = now;
+      if (!paused && inView && !reduce && maxIndex() > 0) { elapsed += dt; if (elapsed >= DELAY) go(index + 1); }
+      bar.style.transform = `scaleX(${Math.min(1, elapsed / DELAY)})`;
+      requestAnimationFrame(loop);
+    })(performance.now());
+    addEventListener('resize', layout);
+    layout();
+  }
+
   /* ---------- Avaliações: setas + fonte ao vivo (Supabase Edge Function), se configurada ---------- */
   function initReviews() {
     const rail = $('#reviewsRail');
@@ -302,38 +356,8 @@ window.Effects = (function () {
     // Moeda gira com o scroll
     gsap.fromTo('#coin', { rotationY: -35, rotationX: 12 }, { rotationY: 35, rotationX: -8, ease: 'none', scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: true } });
 
-    // Modalidades: pilha 3D
-    const discs = $$('.disc'), big = $('#discBig'), dots = $$('#discDots i');
-    if (discs.length > 1) {
-      discs.forEach((d, i) => gsap.set(d, { zIndex: i + 1, yPercent: i === 0 ? 0 : 120, rotationX: i === 0 ? 0 : -50, opacity: i === 0 ? 1 : 0, transformPerspective: 1600 }));
-      const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '.disciplines', start: 'top top', end: 'bottom bottom', scrub: 0.6,
-        onUpdate: (s) => {
-          const tt = s.progress * tl.duration(); const idx = Math.max(0, Math.min(discs.length - 1, Math.floor((tt - 0.35 + 0.95) / 1.45)));
-          if (big && big.textContent !== discs[idx].dataset.title) big.textContent = discs[idx].dataset.title;
-          dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
-        } } });
-      discs.forEach((d, i) => {
-        if (i === 0) return;
-        const at = 0.35 + (i - 1) * 1.45; // pausa entre cards
-        tl.to(discs.slice(0, i), { scale: (k) => 0.92 - (i - 1 - k) * 0.05, yPercent: (k) => -7 * (i - k), rotationX: 6, filter: 'brightness(0.5)', duration: 1 }, at)
-          .to(d, { yPercent: 0, rotationX: 0, opacity: 1, duration: 1 }, at);
-      });
-      tl.to({}, { duration: 0.45 });
-      gsap.fromTo('.disciplines__bg span', { xPercent: 6 }, { xPercent: -6, ease: 'none', scrollTrigger: { trigger: '.disciplines', start: 'top top', end: 'bottom bottom', scrub: true } });
-    }
-
-    // Processo: horizontal
-    const track = $('#processTrack'), steps = $$('.step'), bar = $('#processBar');
-    if (track && steps.length) {
-      const dist = () => Math.max(0, track.scrollWidth - innerWidth);
-      gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.process', start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true,
-        onUpdate: (s) => {
-          bar.style.transform = `scaleX(${s.progress})`;
-          const idx = Math.min(steps.length - 1, Math.floor(s.progress * steps.length * 0.999));
-          steps.forEach((st, i) => st.classList.toggle('is-active', i === idx));
-        } } });
-      gsap.to('#chainring', { rotation: 540, ease: 'none', scrollTrigger: { trigger: '.process', start: 'top bottom', end: 'bottom top', scrub: true } });
-    }
+    // Processo: engrenagem gira com o scroll
+    gsap.to('#chainring', { rotation: 360, ease: 'none', scrollTrigger: { trigger: '.process', start: 'top bottom', end: 'bottom top', scrub: true } });
 
     // CTA: logo gira em 3D
     gsap.fromTo('#ctaLogo', { rotationY: -180, scale: 0.6 }, { rotationY: 0, scale: 1, ease: 'none', transformPerspective: 800, scrollTrigger: { trigger: '.cta', start: 'top bottom', end: 'top 30%', scrub: true } });
@@ -343,7 +367,7 @@ window.Effects = (function () {
 
   function init() {
     initScroll(); initAnchors(); initHeader(); initMenu(); initCursor(); initReveals(); initTilt(); initMagnetic();
-    initLightbox(); initCarousel(); initReviews(); initMarquee(); initScrollScenes();
+    initLightbox(); initCarousel(); initProcessCarousel(); initReviews(); initMarquee(); initScrollScenes();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
     addEventListener('load', refresh);
     // abre na âncora da URL, se houver

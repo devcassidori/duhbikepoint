@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=19">
+  <link rel="stylesheet" href="css/styles.css?v=22">
   <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
 <body class="is-loading">
@@ -191,29 +191,34 @@
     </section>
 
     <!-- DISCIPLINES -->
-    <section class="disciplines" id="modalidades" data-section>
-      <div class="disciplines__pin">
-        <div class="disciplines__bg" aria-hidden="true"><span id="discBig">ROAD</span></div>
-        <div class="container disciplines__head">
-          <p class="kicker" data-cms="sections.disciplines.kicker"></p>
-          <h2 class="h2" data-cms="sections.disciplines.title"></h2>
-        </div>
-        <div class="disciplines__stage" id="discStage"></div>
-        <div class="disciplines__dots" id="discDots" aria-hidden="true"></div>
+    <section class="disciplines section" id="modalidades" data-section>
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker reveal" data-cms="sections.disciplines.kicker"></p>
+          <h2 class="h2 split-words" data-cms="sections.disciplines.title"></h2>
+        </header>
+        <div class="disciplines__grid" id="discStage"></div>
       </div>
     </section>
 
     <!-- PROCESS -->
-    <section class="process" id="processo" data-section>
-      <div class="process__pin">
-        <div class="container process__head">
-          <p class="kicker" data-cms="sections.process.kicker"></p>
-          <h2 class="h2" data-cms="sections.process.title"></h2>
+    <section class="process section" id="processo" data-section>
+      <div class="container">
+        <header class="section-head process__head">
+          <p class="kicker reveal" data-cms="sections.process.kicker"></p>
+          <h2 class="h2 split-words" data-cms="sections.process.title"></h2>
+        </header>
+        <div class="pcar reveal" id="pcar" aria-roledescription="carrossel" aria-label="Etapas do atendimento">
+          <div class="pcar__viewport"><div class="process__track" id="processTrack" aria-live="polite"></div></div>
+          <div class="pcar__controls">
+            <button class="carousel__btn" id="pcarPrev" type="button" aria-label="Etapa anterior"><svg class="i" viewBox="0 0 24 24"><use href="#i-arrow" transform="rotate(180 12 12)"/></svg></button>
+            <div class="pcar__timer" aria-hidden="true"><span id="processBar"></span></div>
+            <div class="carousel__dots" id="pcarDots" role="tablist" aria-label="Escolher etapa"></div>
+            <button class="carousel__btn" id="pcarNext" type="button" aria-label="Próxima etapa"><svg class="i" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></button>
+          </div>
         </div>
-        <div class="process__viewport"><div class="process__track" id="processTrack"></div></div>
-        <div class="container process__bar" aria-hidden="true"><span id="processBar"></span></div>
-        <svg class="process__chainring" id="chainring" viewBox="0 0 200 200" aria-hidden="true"></svg>
       </div>
+      <svg class="process__chainring" id="chainring" viewBox="0 0 200 200" aria-hidden="true"></svg>
     </section>
 
     <!-- GALLERY -->
@@ -386,15 +391,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="js/config.js?v=19"></script>
-  <script src="js/content.js?v=19"></script>
-  <script src="js/store.js?v=19"></script>
-  <script src="js/render.js?v=19"></script>
-  <script src="js/logo-data.js?v=19"></script>
-  <script src="js/hero3d.js?v=19"></script>
-  <script src="js/bike3d.js?v=19"></script>
-  <script src="js/effects.js?v=19"></script>
-  <script src="js/cms.js?v=19"></script>
-  <script src="js/app.js?v=19"></script>
+  <script src="js/config.js?v=22"></script>
+  <script src="js/content.js?v=22"></script>
+  <script src="js/store.js?v=22"></script>
+  <script src="js/render.js?v=22"></script>
+  <script src="js/logo-data.js?v=22"></script>
+  <script src="js/hero3d.js?v=22"></script>
+  <script src="js/bike3d.js?v=22"></script>
+  <script src="js/effects.js?v=22"></script>
+  <script src="js/cms.js?v=22"></script>
+  <script src="js/app.js?v=22"></script>
 </body>
 </html>

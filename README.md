@@ -13,8 +13,8 @@ Site estático (HTML, CSS e JavaScript, sem etapa de build), com efeitos 3D, ani
 - **Hero 3D:** o logo vira uma moeda 3D dentro de uma roda de bike, com coroas e partículas. Reage ao mouse e ao scroll.
 - **Bike 3D montada pelo scroll:** uma speed de carbono que se monta peça por peça (quadro, rodas, transmissão, cockpit e selim). Tem reflexos de estúdio, sombras e contador de "% montada".
 - **Serviços com orçamento em 1 toque:** cada card abre o WhatsApp com a mensagem pronta para aquele serviço.
-- **Modalidades em pilha 3D:** cards de Road, MTB e TT que trocam conforme a rolagem. Cada card aceita uma foto de fundo.
-- **Como funciona:** etapas do atendimento em rolagem horizontal, com barra de progresso.
+- **Modalidades:** cards de Road, MTB e TT lado a lado, com inclinação 3D ao passar o mouse. Cada card aceita uma foto de fundo.
+- **Como funciona:** carrossel automático das etapas do atendimento, que pausa com o mouse em cima. Tem setas, bolinhas, arraste no celular e barra de tempo.
 - **Galeria em carrossel 3D:** arraste, setas, teclado e troca automática. Tocar numa foto abre a imagem em tela cheia.
 - **Avaliações do Google:** nota, total de avaliações e depoimentos em carrossel.
 - **Navegação:** menu em tela cheia, pontos de seção na lateral e uma barra de progresso no topo com uma bike pedalando.
