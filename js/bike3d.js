@@ -107,9 +107,34 @@
 
   const bike = new THREE.Group(); scene.add(bike);
   const parts = [];
-  function part(name, group, offset, rot, t0, t1) {
+  // spot = [x, z] onde a peça fica no chão antes de montar; rot = Euler (x, y, z) da peça deitada
+  function part(name, group, spot, rot, t0, t1) {
     const pivot = new THREE.Group(); pivot.add(group); bike.add(pivot);
-    parts.push({ name, pivot, offset, rot, t0, t1 }); return pivot;
+    parts.push({ name, pivot, spot, rot, t0, t1 }); return pivot;
+  }
+  // caixa da peça no espaço da bike (ignora InstancedMesh, cuja geometria-base não representa as instâncias)
+  const box = new THREE.Box3(), tmpBox = new THREE.Box3();
+  function partBox(pivot) {
+    box.makeEmpty();
+    pivot.updateMatrix(); pivot.updateMatrixWorld(true);
+    const inv = new THREE.Matrix4().copy(bike.matrixWorld).invert();
+    pivot.traverse((o) => {
+      if (!o.isMesh || o.isInstancedMesh) return;
+      if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+      tmpBox.copy(o.geometry.boundingBox).applyMatrix4(new THREE.Matrix4().multiplyMatrices(inv, o.matrixWorld));
+      box.union(tmpBox);
+    });
+    return box;
+  }
+  // calcula a pose "no chão": gira, apoia a parte mais baixa em y=0 e centraliza no ponto escolhido
+  function settleParts() {
+    bike.updateMatrixWorld(true);
+    parts.forEach((pt) => {
+      pt.restQ = new THREE.Quaternion().setFromEuler(new THREE.Euler(pt.rot.x, pt.rot.y, pt.rot.z));
+      pt.pivot.position.set(0, 0, 0); pt.pivot.quaternion.copy(pt.restQ);
+      const b = partBox(pt.pivot), c = b.getCenter(new V3());
+      pt.restP = P(pt.spot[0] - c.x, -b.min.y + 0.002, pt.spot[1] - c.z);
+    });
   }
   const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), one = P(1, 1, 1);
 
@@ -149,7 +174,7 @@
   bottleG.position.copy(new V3().lerpVectors(BB, HTb, 0.45)).add(P(-dtDir.y * 0.064, dtDir.x * 0.064, 0));
   bottleG.quaternion.setFromUnitVectors(new V3(0, 1, 0), dtDir);
   frame.add(bottleG);
-  part('frame', frame, P(0, 0.22, 0), P(0.15, 0.4, 0.1), 0.0, 0.18);
+  part('frame', frame, [0.05, -0.4], P(-Math.PI / 2, 0.12, 0), 0.0, 0.18);
 
   // ---------- Garfo ----------
   const fork = new THREE.Group();
@@ -160,7 +185,7 @@
   });
   const crown = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.035, 0.13), M.frame); crown.position.set(0.418, 0.567, 0); crown.rotation.z = -0.25; fork.add(crown);
   const caliperF = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.03, 0.03), M.alloy); caliperF.position.set(F.x - 0.035, F.y + 0.055, -0.05); caliperF.rotation.z = 0.6; fork.add(caliperF);
-  part('fork', fork, P(0.55, 0.3, 0.2), P(0, 0, -0.6), 0.04, 0.2);
+  part('fork', fork, [0.85, -0.1], P(-Math.PI / 2, 0.6, 0), 0.04, 0.2);
 
   // ---------- Rodas ----------
   const rimGeo = (() => {
@@ -194,8 +219,8 @@
   }
   const rearWheel = makeWheel(true); rearWheel.position.copy(R);
   const frontWheel = makeWheel(false); frontWheel.position.copy(F);
-  part('rearWheel', rearWheel, P(-0.85, 0.1, 0.35), P(0, 1.3, 0), 0.2, 0.36);
-  part('frontWheel', frontWheel, P(0.85, 0.1, 0.35), P(0, -1.3, 0), 0.24, 0.4);
+  part('rearWheel', rearWheel, [-0.72, 0.32], P(-Math.PI / 2, 0, 0), 0.2, 0.36);
+  part('frontWheel', frontWheel, [0.4, 0.42], P(-Math.PI / 2, 0, 0), 0.24, 0.4);
 
   // ---------- Pedivela ----------
   const crank = new THREE.Group();
@@ -217,7 +242,7 @@
     pedal.add(body, plate); pedal.position.set(end.x, end.y, z + 0.05 * s); crank.add(pedal);
   });
   const crankAxis = new THREE.Group(); crankAxis.position.copy(BB); crankAxis.add(crank);
-  part('crank', crankAxis, P(0.15, -0.3, 0.4), P(0, 0, 2.2), 0.4, 0.5);
+  part('crank', crankAxis, [-0.17, 0.36], P(-Math.PI / 2, 0, 0), 0.4, 0.5);
 
   // ---------- Transmissão ----------
   const drive = new THREE.Group();
@@ -240,7 +265,7 @@
   const rdBody = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.045, 0.025), M.alloy); rdBody.position.set(R.x + 0.005, R.y - 0.035, 0.078); rdBody.rotation.z = 0.3; drive.add(rdBody);
   const fd = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.022, 0.02), M.alloy); fd.position.set(BB.x - 0.04, BB.y + 0.135, 0.06); fd.rotation.z = -0.35; drive.add(fd);
   const caliperR = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.03, 0.03), M.alloy); caliperR.position.set(R.x + 0.06, R.y + 0.02, -0.06); drive.add(caliperR);
-  part('drive', drive, P(-0.4, -0.25, 0.45), P(0.6, 0, 0), 0.44, 0.58);
+  part('drive', drive, [-0.95, -0.3], P(-Math.PI / 2, -0.3, 0), 0.44, 0.58);
 
   // ---------- Cockpit ----------
   const cockpit = new THREE.Group();
@@ -256,7 +281,7 @@
     const hoodTop = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.012, 0.022), M.green); hoodTop.position.set(0.575, 0.865, 0.205 * s); cockpit.add(hoodTop);
   });
   const computer = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.012, 0.04), M.rubber); computer.position.set(0.5, 0.85, 0); cockpit.add(computer);
-  part('cockpit', cockpit, P(0.5, 0.28, -0.4), P(0.8, 0, 0.4), 0.58, 0.68);
+  part('cockpit', cockpit, [0.95, 0.4], P(0, -0.5, 0.35), 0.58, 0.68);
 
   // ---------- Canote + selim ----------
   const seat = new THREE.Group();
@@ -272,10 +297,11 @@
   const saddle = new THREE.Mesh(sg, M.saddle); saddle.position.set(-0.235, 0.935, 0); seat.add(saddle);
   const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.003, 0.008), M.green); stripe.position.set(-0.22, 0.958, 0); seat.add(stripe);
   [-1, 1].forEach((s) => seat.add(tube(P(-0.33, 0.935, 0.025 * s), P(-0.15, 0.935, 0.012 * s), 0.003, M.steel)));
-  part('seat', seat, P(-0.35, 0.55, -0.35), P(0, 0, -0.9), 0.62, 0.75);
+  part('seat', seat, [-0.55, -0.75], P(-Math.PI / 2, 0.4, 0), 0.62, 0.75);
 
   bike.traverse((o) => { if (o.isMesh && o.material !== M.decal) o.castShadow = true; });
   bike.position.y = -0.48;
+  settleParts();
 
   // ---------- Chão ----------
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.ShadowMaterial({ opacity: 0.45 }));
@@ -323,6 +349,7 @@
   // ---------- Loop ----------
   const ease = (t) => 1 - Math.pow(1 - t, 3);
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const IDQ = new THREE.Quaternion();
   let progress = 0, smooth = 0, spin = 0, visible = false, lastScroll = scrollY;
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { rootMargin: '100px' }).observe(section);
   function readProgress() { const r = section.getBoundingClientRect(); const total = r.height - innerHeight; progress = total > 0 ? clamp01(-r.top / total) : 0; }
@@ -336,11 +363,12 @@
     smooth += (progress - smooth) * (reduce ? 1 : Math.min(1, dt * 7));
     const p = smooth, t = clock.elapsedTime;
 
+    // peças começam deitadas no chão; ao montar, sobem em arco e encaixam no lugar
     parts.forEach((pt) => {
       const k = ease(clamp01((p - pt.t0) / (pt.t1 - pt.t0))), inv = 1 - k;
-      const float = reduce ? 0 : Math.sin(t * 1.4 + pt.t0 * 20) * 0.02 * inv;
-      pt.pivot.position.set(pt.offset.x * inv, pt.offset.y * inv + float, pt.offset.z * inv);
-      pt.pivot.rotation.set(pt.rot.x * inv, pt.rot.y * inv, pt.rot.z * inv);
+      const lift = Math.sin(Math.PI * Math.min(1, k * 1.15)) * 0.28;
+      pt.pivot.position.set(pt.restP.x * inv, pt.restP.y * inv + lift, pt.restP.z * inv);
+      pt.pivot.quaternion.copy(pt.restQ).slerp(IDQ, k);
     });
 
     const dy = scrollY - lastScroll; lastScroll = scrollY;
