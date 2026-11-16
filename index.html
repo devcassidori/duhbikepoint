@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Duh Bike Point | Oficina de bicicletas em São Paulo</title>
+  <meta name="description" content="Oficina de bicicletas no bairro do Limão, São Paulo. Manutenção especializada em Road, MTB e TT. Performance e segurança.">
+  <meta name="theme-color" content="#0a0c0b">
+  <meta property="og:title" content="Duh Bike Point | Oficina de bicicletas">
+  <meta property="og:description" content="Manutenção especializada Road, MTB e TT no bairro do Limão, São Paulo.">
+  <meta property="og:image" content="assets/logo-512.png">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/logo-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=18">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body class="is-loading">
+  <!-- Loader -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <img src="assets/logo-512.png" alt="" class="loader__logo js-logo">
+    <div class="loader__bar"><span></span></div>
+  </div>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <button class="brand" id="brandLogo" type="button" aria-label="Duh Bike Point — voltar ao início" title="Duh Bike Point">
+        <img class="js-logo" src="assets/logo-512.png" alt="Logo Duh Bike Point" width="44" height="44">
+        <span class="brand__name"><strong>DUH</strong> BIKE POINT</span>
+      </button>
+      <nav class="nav" aria-label="Principal">
+        <a href="#oficina">Oficina</a>
+        <a href="#bike">Montagem</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#modalidades">Modalidades</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="btn btn--sm btn--primary header__cta js-wa" href="#" target="_blank" rel="noopener">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span>
+      </a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu">
+        <span class="menu-btn__label">Menu</span>
+        <span class="menu-btn__icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+    <!-- estrada de progresso com a bike -->
+    <div class="road" aria-hidden="true">
+      <div class="road__fill" id="roadFill"></div>
+      <svg class="road__bike" id="roadBike" viewBox="0 0 64 36">
+        <g class="rb-wheel" id="rbW1"><circle cx="13" cy="24" r="10"/><path d="M13 14v20M3 24h20M6 17l14 14M20 17 6 31"/></g>
+        <g class="rb-wheel" id="rbW2"><circle cx="51" cy="24" r="10"/><path d="M51 14v20M41 24h20M44 17l14 14M58 17 44 31"/></g>
+        <path class="rb-frame" d="M13 24 26 24 40 11 22 11 26 24M22 11 20 6M17 6h7M40 11l11 13M40 11l-2-5h5"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- Menu de navegação (overlay) -->
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu de navegação" hidden>
+    <div class="menu__bg" aria-hidden="true"><img src="assets/logo-mark-white.png" alt=""></div>
+    <div class="container menu__grid">
+      <nav class="menu__nav" aria-label="Seções">
+        <a href="#top"><span class="menu__n">00</span><span class="menu__t">Início</span></a>
+        <a href="#oficina"><span class="menu__n">01</span><span class="menu__t">A oficina</span></a>
+        <a href="#bike"><span class="menu__n">02</span><span class="menu__t">Montagem</span></a>
+        <a href="#servicos"><span class="menu__n">03</span><span class="menu__t">Serviços</span></a>
+        <a href="#modalidades"><span class="menu__n">04</span><span class="menu__t">Modalidades</span></a>
+        <a href="#processo"><span class="menu__n">05</span><span class="menu__t">Como funciona</span></a>
+        <a href="#galeria"><span class="menu__n">06</span><span class="menu__t">Galeria</span></a>
+        <a href="#avaliacoes"><span class="menu__n">07</span><span class="menu__t">Avaliações</span></a>
+        <a href="#contato"><span class="menu__n">08</span><span class="menu__t">Contato</span></a>
+      </nav>
+      <aside class="menu__aside">
+        <p class="kicker" data-cms="sections.menu.kicker"></p>
+        <a class="menu__big js-wa" href="#" target="_blank" rel="noopener" data-cms="brand.phoneLabel"></a>
+        <p class="muted"><span data-cms="brand.address"></span><br><span data-cms="brand.district"></span></p>
+        <p class="muted" data-cms="brand.hours"></p>
+        <div class="menu__actions">
+          <a class="btn btn--primary js-wa" href="#" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> WhatsApp</a>
+          <a class="btn btn--ghost js-ig" href="#" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ig"/></svg> Instagram</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Navegação lateral por pontos -->
+  <nav class="dots" id="dots" aria-label="Navegação por seção">
+    <a href="#top" data-label="Início"></a>
+    <a href="#oficina" data-label="Oficina"></a>
+    <a href="#bike" data-label="Montagem"></a>
+    <a href="#servicos" data-label="Serviços"></a>
+    <a href="#modalidades" data-label="Modalidades"></a>
+    <a href="#processo" data-label="Como funciona"></a>
+    <a href="#galeria" data-label="Galeria"></a>
+    <a href="#avaliacoes" data-label="Avaliações"></a>
+    <a href="#contato" data-label="Contato"></a>
+  </nav>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" id="hero" data-section>
+      <canvas class="hero__canvas" id="hero3d" aria-hidden="true"></canvas>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__content" id="heroContent">
+        <p class="eyebrow anim-in"><span class="dot"></span><span data-cms="hero.eyebrow"></span></p>
+        <h1 class="hero__title">
+          <span class="line"><span class="split" data-cms="hero.title1"></span></span>
+          <span class="line line--accent"><span class="split" data-cms="hero.title2"></span></span>
+        </h1>
+        <p class="hero__lead anim-in" data-cms="hero.lead"></p>
+        <div class="hero__actions anim-in">
+          <a class="btn btn--primary btn--lg js-wa magnetic" href="#" target="_blank" rel="noopener">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+            <span data-cms="hero.cta"></span>
+          </a>
+          <a class="btn btn--ghost btn--lg magnetic" href="#servicos"><span data-cms="hero.cta2"></span>
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <ul class="hero__chips anim-in" id="heroChips" aria-label="Modalidades"></ul>
+      </div>
+      <div class="hero__scroll" aria-hidden="true"><span>role</span><i></i></div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee" aria-label="Especialidades">
+      <div class="marquee__track" id="marquee">
+        <div class="marquee__row" id="marqueeRow"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about section" id="oficina" data-section>
+      <div class="container about__grid">
+        <div class="about__text">
+          <p class="kicker reveal" data-cms="about.kicker"></p>
+          <h2 class="h2 split-words" data-cms="about.title"></h2>
+          <p class="body-lg reveal" data-cms="about.text"></p>
+          <dl class="about__facts reveal">
+            <div><dt class="mono">Endereço</dt><dd><span data-cms="brand.address"></span><br><span data-cms="brand.district"></span></dd></div>
+            <div><dt class="mono">Contato</dt><dd><a class="js-wa link" href="#" target="_blank" rel="noopener" data-cms="brand.phoneLabel"></a></dd></div>
+          </dl>
+        </div>
+        <div class="about__visual reveal">
+          <div class="coin-stage" data-tilt="16">
+            <div class="coin" id="coin">
+              <div class="coin__layer coin__layer--back"></div>
+              <div class="coin__layer coin__layer--mid"></div>
+              <img class="coin__face js-logo" src="assets/logo-512.png" alt="Logo Duh Bike Point">
+              <div class="coin__glare"></div>
+            </div>
+            <div class="orbit orbit--1"><span>ROAD</span></div>
+            <div class="orbit orbit--2"><span>MTB</span></div>
+            <div class="orbit orbit--3"><span>TT</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIKE 3D (montagem com o scroll) -->
+    <section class="bike" id="bike" data-section>
+      <div class="bike__pin">
+        <canvas class="bike__canvas" id="bike3d" aria-hidden="true"></canvas>
+        <div class="container bike__ui">
+          <div class="bike__head">
+            <p class="kicker" data-cms="sections.bike.kicker"></p>
+            <h2 class="h2 bike__title" data-cms="sections.bike.title"></h2>
+          </div>
+          <ol class="bike__steps" id="bikeSteps"></ol>
+          <div class="bike__meter" aria-hidden="true"><span id="bikePct">0</span>%<small>montada</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services section" id="servicos" data-section>
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker reveal" data-cms="sections.services.kicker"></p>
+          <h2 class="h2 split-words" data-cms="sections.services.title"></h2>
+        </header>
+        <div class="services__grid" id="servicesGrid"></div>
+      </div>
+    </section>
+
+    <!-- DISCIPLINES -->
+    <section class="disciplines" id="modalidades" data-section>
+      <div class="disciplines__pin">
+        <div class="disciplines__bg" aria-hidden="true"><span id="discBig">ROAD</span></div>
+        <div class="container disciplines__head">
+          <p class="kicker" data-cms="sections.disciplines.kicker"></p>
+          <h2 class="h2" data-cms="sections.disciplines.title"></h2>
+        </div>
+        <div class="disciplines__stage" id="discStage"></div>
+        <div class="disciplines__dots" id="discDots" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" id="processo" data-section>
+      <div class="process__pin">
+        <div class="container process__head">
+          <p class="kicker" data-cms="sections.process.kicker"></p>
+          <h2 class="h2" data-cms="sections.process.title"></h2>
+        </div>
+        <div class="process__viewport"><div class="process__track" id="processTrack"></div></div>
+        <div class="container process__bar" aria-hidden="true"><span id="processBar"></span></div>
+        <svg class="process__chainring" id="chainring" viewBox="0 0 200 200" aria-hidden="true"></svg>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery section" id="galeria" data-section>
+      <div class="container">
+        <header class="section-head section-head--center">
+          <p class="kicker reveal" data-cms="sections.gallery.kicker"></p>
+          <h2 class="h2 split-words" data-cms="sections.gallery.title"></h2>
+          <p class="muted reveal"><span data-cms="sections.gallery.hint"></span> mais no <a class="link js-ig" href="#" target="_blank" rel="noopener">Instagram</a></p>
+        </header>
+      </div>
+      <div class="carousel reveal" id="carousel" aria-roledescription="carrossel" aria-label="Fotos da oficina">
+        <div class="carousel__stage" id="carouselStage"></div>
+        <div class="container carousel__controls">
+          <button class="carousel__btn" id="carPrev" type="button" aria-label="Foto anterior"><svg class="i" viewBox="0 0 24 24"><use href="#i-arrow" transform="rotate(180 12 12)"/></svg></button>
+          <div class="carousel__dots" id="carDots" role="tablist" aria-label="Escolher foto"></div>
+          <button class="carousel__btn" id="carNext" type="button" aria-label="Próxima foto"><svg class="i" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="reviews section" id="avaliacoes" data-section>
+      <div class="container">
+        <header class="section-head reviews__head">
+          <div>
+            <p class="kicker reveal" data-cms="sections.reviews.kicker"></p>
+            <h2 class="h2 split-words" data-cms="reviews.title"></h2>
+          </div>
+          <div class="rating-card reveal" data-tilt="8">
+            <svg class="rating-card__g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.5z"/></svg>
+            <div class="rating-card__score"><strong data-cms="reviews.rating"></strong><span class="stars" id="ratingStars" aria-hidden="true"></span></div>
+            <p class="rating-card__count"><span data-cms="reviews.count"></span> avaliações no Google</p>
+            <div class="rating-card__actions">
+              <a class="btn btn--primary btn--sm js-reviews" href="#" target="_blank" rel="noopener">Ver no Google</a>
+              <a class="btn btn--ghost btn--sm js-review-write" href="#" target="_blank" rel="noopener">Avaliar</a>
+            </div>
+          </div>
+        </header>
+      </div>
+      <div class="reviews__rail" id="reviewsRail" hidden>
+        <div class="reviews__track" id="reviewsTrack"></div>
+      </div>
+      <div class="container reviews__nav" id="reviewsNav" hidden>
+        <button class="carousel__btn" id="revPrev" type="button" aria-label="Avaliação anterior"><svg class="i" viewBox="0 0 24 24"><use href="#i-arrow" transform="rotate(180 12 12)"/></svg></button>
+        <span class="mono" id="reviewsSource"></span>
+        <button class="carousel__btn" id="revNext" type="button" aria-label="Próxima avaliação"><svg class="i" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></button>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact section" id="contato" data-section>
+      <div class="container contact__grid">
+        <div class="contact__col reveal">
+          <div class="contact__card" data-tilt="5">
+            <p class="kicker" data-cms="sections.contact.kicker"></p>
+            <h2 class="h2" data-cms="sections.contact.title"></h2>
+            <ul class="contact__list">
+              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-pin"/></svg><div><strong data-cms="brand.address"></strong><span data-cms="brand.district"></span></div></li>
+              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-wa"/></svg><div><a class="js-wa link" href="#" target="_blank" rel="noopener"><strong data-cms="brand.phoneLabel"></strong></a><span>WhatsApp</span></div></li>
+              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-clock"/></svg><div><strong>Horário</strong><span data-cms="brand.hours"></span></div></li>
+              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-ig"/></svg><div><a class="js-ig link" href="#" target="_blank" rel="noopener"><strong>@<span data-cms="brand.instagram"></span></strong></a><span>Instagram</span></div></li>
+            </ul>
+            <div class="contact__actions">
+              <a class="btn btn--primary js-wa" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+              <a class="btn btn--ghost js-maps" href="#" target="_blank" rel="noopener">Abrir no mapa</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact__map reveal">
+          <iframe id="mapFrame" title="Mapa — Duh Bike Point" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta section">
+      <div class="container cta__inner">
+        <img class="cta__logo js-logo" id="ctaLogo" src="assets/logo-512.png" alt="" aria-hidden="true">
+        <h2 class="cta__title split-words" data-cms="cta.title"></h2>
+        <p class="body-lg reveal" data-cms="cta.text"></p>
+        <a class="btn btn--primary btn--xl js-wa magnetic reveal" href="#" target="_blank" rel="noopener">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> <span data-cms="sections.cta.button"></span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img class="js-logo" src="assets/logo-512.png" alt="" width="40" height="40">
+        <div><strong data-cms="brand.name"></strong><span data-cms="brand.tagline"></span></div>
+      </div>
+      <nav class="footer__nav" aria-label="Rodapé">
+        <a href="#oficina">Oficina</a><a href="#servicos">Serviços</a><a href="#galeria">Galeria</a><a href="#avaliacoes">Avaliações</a><a href="#contato">Contato</a>
+      </nav>
+      <p class="mono footer__copy">© <span id="year"></span> Duh Bike Point · São Paulo</p>
+    </div>
+  </footer>
+
+  <a class="wa-float js-wa" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+  </a>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizar foto" hidden>
+    <figure class="lightbox__figure">
+      <img id="lbImg" alt="">
+      <figcaption><span id="lbCap"></span><span class="mono" id="lbCount"></span></figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__close" id="lbClose" type="button" aria-label="Fechar">✕</button>
+    <button class="lightbox__btn lightbox__prev" id="lbPrev" type="button" aria-label="Foto anterior"><svg class="i" viewBox="0 0 24 24"><use href="#i-arrow" transform="rotate(180 12 12)"/></svg></button>
+    <button class="lightbox__btn lightbox__next" id="lbNext" type="button" aria-label="Próxima foto"><svg class="i" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></button>
+  </div>
+
+  <!-- ============ CMS ============ -->
+  <div class="cms-login" id="cmsLogin" role="dialog" aria-modal="true" aria-labelledby="cmsLoginTitle" hidden>
+    <form class="cms-login__card" id="cmsLoginForm" autocomplete="on">
+      <img class="js-logo" src="assets/logo-512.png" alt="" width="64" height="64">
+      <h2 id="cmsLoginTitle">Painel da oficina</h2>
+      <p class="muted" id="cmsLoginMode">Entre para editar o conteúdo do site.</p>
+      <label class="field"><span>Usuário</span><input name="user" type="text" required autocomplete="username" autocapitalize="none" spellcheck="false"></label>
+      <label class="field"><span>Senha</span><input name="pass" type="password" required autocomplete="current-password"></label>
+      <p class="cms-error" id="cmsLoginError" role="alert"></p>
+      <div class="cms-row">
+        <button type="button" class="btn btn--ghost" data-close>Cancelar</button>
+        <button type="submit" class="btn btn--primary" id="cmsLoginBtn">Entrar</button>
+      </div>
+    </form>
+  </div>
+
+  <aside class="cms" id="cms" aria-label="Painel de edição" hidden>
+    <div class="cms__head">
+      <div><strong>CMS</strong> <span class="mono cms__mode" id="cmsMode"></span></div>
+      <div class="cms__head-actions">
+        <button class="cms-btn" id="cmsMin" type="button" title="Minimizar" aria-label="Minimizar">–</button>
+        <button class="cms-btn" id="cmsLogout" type="button">Sair</button>
+      </div>
+    </div>
+    <div class="cms__tabs" role="tablist">
+      <button role="tab" data-tab="geral" aria-selected="true">Geral</button>
+      <button role="tab" data-tab="textos">Textos</button>
+      <button role="tab" data-tab="servicos">Serviços</button>
+      <button role="tab" data-tab="galeria">Galeria</button>
+      <button role="tab" data-tab="extras">Seções</button>
+      <button role="tab" data-tab="avaliacoes">Avaliações</button>
+      <button role="tab" data-tab="publicar">Backup</button>
+      <button role="tab" data-tab="conta">Conta</button>
+    </div>
+    <div class="cms__body" id="cmsBody"></div>
+    <div class="cms__foot">
+      <span class="mono" id="cmsStatus">Tudo salvo</span>
+      <button class="btn btn--primary btn--sm" id="cmsSave" type="button">Salvar e publicar</button>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Icons -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  </svg>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js?v=18"></script>
+  <script src="js/content.js?v=18"></script>
+  <script src="js/store.js?v=18"></script>
+  <script src="js/render.js?v=18"></script>
+  <script src="js/logo-data.js?v=18"></script>
+  <script src="js/hero3d.js?v=18"></script>
+  <script src="js/bike3d.js?v=18"></script>
+  <script src="js/effects.js?v=18"></script>
+  <script src="js/cms.js?v=18"></script>
+  <script src="js/app.js?v=18"></script>
+</body>
+</html>

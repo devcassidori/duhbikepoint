@@ -1,0 +1,5 @@
+CMS-LEIA-ME.md
+.claude/
+*.log
+Thumbs.db
+.DS_Store
