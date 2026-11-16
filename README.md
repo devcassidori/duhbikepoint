@@ -12,6 +12,7 @@ Site estático (HTML, CSS e JavaScript, sem etapa de build), com efeitos 3D, ani
 
 - **Hero 3D:** o logo vira uma moeda 3D dentro de uma roda de bike, com coroas e partículas. Reage ao mouse e ao scroll.
 - **Bike 3D montada pelo scroll:** uma speed de carbono que se monta peça por peça (quadro, rodas, transmissão, cockpit e selim). Tem reflexos de estúdio, sombras e contador de "% montada".
+- **Serviços com orçamento em 1 toque:** cada card abre o WhatsApp com a mensagem pronta para aquele serviço.
 - **Modalidades em pilha 3D:** cards de Road, MTB e TT que trocam conforme a rolagem. Cada card aceita uma foto de fundo.
 - **Como funciona:** etapas do atendimento em rolagem horizontal, com barra de progresso.
 - **Galeria em carrossel 3D:** arraste, setas, teclado e troca automática. Tocar numa foto abre a imagem em tela cheia.
@@ -87,7 +88,8 @@ docs/screenshots/     prints deste README
 
 O site tem um **CMS secreto**, sem link visível na página. Pelo CMS dá para:
 
-- editar todos os textos e títulos das seções, os dados de contato e o SEO;
+- editar todos os textos e títulos das seções, os nomes do menu, os rótulos dos botões, a mensagem padrão do WhatsApp, os dados de contato, o rodapé e o SEO;
+- mostrar ou ocultar seções inteiras (somem do site e do menu);
 - trocar o logo;
 - adicionar, editar, reordenar e remover serviços, modalidades (com foto de fundo), etapas, fotos da galeria e avaliações;
 - exportar e importar um backup em JSON.

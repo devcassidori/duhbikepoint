@@ -164,6 +164,20 @@ window.CMS = (function () {
       ${field('Menu — rótulo do contato', 'sections.menu.kicker')}${field('Botão final', 'sections.cta.button')}
       <h4 style="margin-top:24px">Etapas da montagem (bike 3D)</h4><p class="hint">São 5 etapas, ligadas às fases da animação.</p>
       ${(Store.get('sections.bike.steps') || []).map((st, i) => `<div class="cms-item"><span class="mono">Etapa ${i + 1}</span>${field('Título', `sections.bike.steps.${i}.title`)}${field('Texto', `sections.bike.steps.${i}.text`, 'textarea')}</div>`).join('')}
+      <h4 style="margin-top:24px">Mostrar / ocultar seções</h4><p class="hint">Seções ocultas somem do site e do menu.</p>
+      ${[['marquee', 'Faixa verde'], ['oficina', 'A oficina'], ['bike', 'Montagem 3D'], ['servicos', 'Serviços'], ['modalidades', 'Modalidades'], ['processo', 'Como funciona'], ['galeria', 'Galeria'], ['avaliacoes', 'Avaliações'], ['contato', 'Contato']]
+        .map(([k, l]) => `<label class="cms-check"><input type="checkbox" data-path="visibility.${k}" ${Store.get('visibility.' + k) === false ? '' : 'checked'}> ${l}</label>`).join('')}
+      <h4 style="margin-top:24px">Nomes no menu</h4>
+      ${Object.keys(Store.get('labels.nav') || {}).map((k) => field(k === 'top' ? 'Início' : (Store.get('labels.nav.' + k) || k), 'labels.nav.' + k)).join('')}
+      <h4 style="margin-top:24px">Botões e rótulos</h4>
+      ${field('Mensagem padrão do WhatsApp', 'brand.waMessage', 'textarea')}
+      ${field('Botão dos serviços', 'labels.serviceCta')}${field('Mensagem do orçamento (antes do nome do serviço)', 'labels.serviceMessage')}
+      ${field('Botão WhatsApp', 'labels.whatsapp')}${field('Rótulo Instagram', 'labels.instagram')}
+      ${field('Botão Menu', 'labels.menu')}${field('Botão Fechar', 'labels.close')}
+      ${field('Dica de rolagem', 'labels.scroll')}${field('Contador da bike', 'labels.mounted')}
+      ${field('Botão “Ver no Google”', 'labels.seeGoogle')}${field('Botão “Avaliar”', 'labels.rateGoogle')}${field('Texto após o total de avaliações', 'labels.reviewsCount')}
+      ${field('Rótulo do horário', 'labels.hours')}${field('Contato — botão WhatsApp', 'labels.contactWhatsapp')}${field('Contato — botão mapa', 'labels.contactMap')}
+      ${field('Rodapé', 'footer.text')}
       <h4 style="margin-top:24px">Faixa verde (letreiro)</h4>${simpleList('marquee', 'item')}
       <h4 style="margin-top:24px">Etiquetas do topo</h4>${simpleList('chips', 'etiqueta')}`,
     servicos: () => `<h4>Serviços</h4><p class="hint">Cards 3D da seção Serviços.</p>${listEditor('services', [['Ícone', 'icon', 'icon'], ['Título', 'title'], ['Descrição', 'text', 'textarea']], 'serviço')}`,
@@ -314,8 +328,8 @@ window.CMS = (function () {
     const B = body();
     B.addEventListener('input', (e) => {
       const p = e.target.dataset && e.target.dataset.path; if (!p) return;
-      Store.set(p, e.target.value);
-      const isList = /^(services|gallery|disciplines|process|reviews\.items|marquee|chips|sections\.bike\.steps)\./.test(p) || /title$|kicker$/.test(p) || p.startsWith('seo.');
+      Store.set(p, e.target.type === 'checkbox' ? e.target.checked : e.target.value);
+      const isList = /^(services|gallery|disciplines|process|reviews\.items|marquee|chips|sections\.bike\.steps)\./.test(p) || /title$|kicker$/.test(p) || /^(seo|visibility|labels)\./.test(p) || p === 'brand.waMessage';
       markDirty(isList);
       if (!isList) { $$(`[data-cms="${p}"]`).forEach((el) => (el.textContent = e.target.value)); Render.links(); }
     });

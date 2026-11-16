@@ -9,12 +9,32 @@ window.DEFAULT_CONTENT = {
     "address": "Rua Rosa Marchetti, 48",
     "district": "Bairro do Limão — São Paulo, SP",
     "hours": "Atendimento com hora marcada — chame no WhatsApp",
-    "logo": "assets/logo-512.png"
+    "logo": "assets/logo-512.png",
+    "waMessage": "Olá! Vim pelo site da Duh Bike Point e gostaria de agendar um serviço."
   },
   "seo": {
     "title": "Duh Bike Point | Oficina de bicicletas em São Paulo",
     "description": "Oficina de bicicletas no bairro do Limão, São Paulo. Manutenção especializada em Road, MTB e TT. Performance e segurança."
   },
+  "labels": {
+    "nav": { "top": "Início", "oficina": "A oficina", "bike": "Montagem", "servicos": "Serviços", "modalidades": "Modalidades", "processo": "Como funciona", "galeria": "Galeria", "avaliacoes": "Avaliações", "contato": "Contato" },
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "menu": "Menu",
+    "close": "Fechar",
+    "scroll": "role",
+    "mounted": "montada",
+    "seeGoogle": "Ver no Google",
+    "rateGoogle": "Avaliar",
+    "reviewsCount": "avaliações no Google",
+    "hours": "Horário",
+    "contactWhatsapp": "Chamar no WhatsApp",
+    "contactMap": "Abrir no mapa",
+    "serviceCta": "Pedir orçamento",
+    "serviceMessage": "Olá! Gostaria de um orçamento de: "
+  },
+  "visibility": { "marquee": true, "oficina": true, "bike": true, "servicos": true, "modalidades": true, "processo": true, "galeria": true, "avaliacoes": true, "contato": true },
+  "footer": { "text": "Duh Bike Point · São Paulo" },
   "marquee": ["Manutenção especializada", "Road", "MTB", "TT", "Performance & segurança"],
   "chips": ["Road", "MTB", "TT"],
   "sections": {

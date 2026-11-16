@@ -54,6 +54,7 @@ window.Effects = (function () {
       rb.style.transform = `translateX(${p * (innerWidth - 34) - 4}px)`;
       const rot = `rotate(${y * 0.6}deg)`; w1.style.transform = rot; w2.style.transform = rot;
       dots.classList.toggle('is-visible', y > innerHeight * 0.6);
+      document.body.classList.toggle('at-hero', y < innerHeight * 0.55);
     }
     addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     addEventListener('resize', update); update();
@@ -72,13 +73,13 @@ window.Effects = (function () {
   function openMenu() {
     const m = menu(); m.hidden = false; $$('.menu__nav a', m).forEach((a, i) => a.style.setProperty('--i', i));
     requestAnimationFrame(() => requestAnimationFrame(() => m.classList.add('is-open')));
-    btn().setAttribute('aria-expanded', 'true'); btn().querySelector('.menu-btn__label').textContent = 'Fechar';
+    btn().setAttribute('aria-expanded', 'true'); btn().querySelector('.menu-btn__label').textContent = Store.get('labels.close') || 'Fechar';
     document.body.classList.add('menu-open'); lenis && lenis.stop();
     setTimeout(() => { const a = $('.menu__nav a', m); a && a.focus({ preventScroll: true }); }, 300);
   }
   function closeMenu(instant) {
     const m = menu(); if (!m || m.hidden) return;
-    m.classList.remove('is-open'); btn().setAttribute('aria-expanded', 'false'); btn().querySelector('.menu-btn__label').textContent = 'Menu';
+    m.classList.remove('is-open'); btn().setAttribute('aria-expanded', 'false'); btn().querySelector('.menu-btn__label').textContent = Store.get('labels.menu') || 'Menu';
     document.body.classList.remove('menu-open'); lenis && lenis.start();
     setTimeout(() => { if (!m.classList.contains('is-open')) m.hidden = true; }, instant ? 0 : 700);
   }

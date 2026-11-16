@@ -14,10 +14,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=18">
+  <link rel="stylesheet" href="css/styles.css?v=19">
   <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
 <body class="is-loading">
+  <a class="skip-link" href="#oficina">Pular para o conteúdo</a>
   <!-- Loader -->
   <div class="loader" id="loader" aria-hidden="true">
     <img src="assets/logo-512.png" alt="" class="loader__logo js-logo">
@@ -35,19 +36,19 @@
         <span class="brand__name"><strong>DUH</strong> BIKE POINT</span>
       </button>
       <nav class="nav" aria-label="Principal">
-        <a href="#oficina">Oficina</a>
-        <a href="#bike">Montagem</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#modalidades">Modalidades</a>
-        <a href="#galeria">Galeria</a>
-        <a href="#avaliacoes">Avaliações</a>
-        <a href="#contato">Contato</a>
+        <a href="#oficina" data-nav="oficina">Oficina</a>
+        <a href="#bike" data-nav="bike">Montagem</a>
+        <a href="#servicos" data-nav="servicos">Serviços</a>
+        <a href="#modalidades" data-nav="modalidades">Modalidades</a>
+        <a href="#galeria" data-nav="galeria">Galeria</a>
+        <a href="#avaliacoes" data-nav="avaliacoes">Avaliações</a>
+        <a href="#contato" data-nav="contato">Contato</a>
       </nav>
       <a class="btn btn--sm btn--primary header__cta js-wa" href="#" target="_blank" rel="noopener">
-        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span>
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-cms="labels.whatsapp"></span>
       </a>
       <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu">
-        <span class="menu-btn__label">Menu</span>
+        <span class="menu-btn__label" data-cms="labels.menu"></span>
         <span class="menu-btn__icon" aria-hidden="true"><i></i><i></i></span>
       </button>
     </div>
@@ -67,15 +68,15 @@
     <div class="menu__bg" aria-hidden="true"><img src="assets/logo-mark-white.png" alt=""></div>
     <div class="container menu__grid">
       <nav class="menu__nav" aria-label="Seções">
-        <a href="#top"><span class="menu__n">00</span><span class="menu__t">Início</span></a>
-        <a href="#oficina"><span class="menu__n">01</span><span class="menu__t">A oficina</span></a>
-        <a href="#bike"><span class="menu__n">02</span><span class="menu__t">Montagem</span></a>
-        <a href="#servicos"><span class="menu__n">03</span><span class="menu__t">Serviços</span></a>
-        <a href="#modalidades"><span class="menu__n">04</span><span class="menu__t">Modalidades</span></a>
-        <a href="#processo"><span class="menu__n">05</span><span class="menu__t">Como funciona</span></a>
-        <a href="#galeria"><span class="menu__n">06</span><span class="menu__t">Galeria</span></a>
-        <a href="#avaliacoes"><span class="menu__n">07</span><span class="menu__t">Avaliações</span></a>
-        <a href="#contato"><span class="menu__n">08</span><span class="menu__t">Contato</span></a>
+        <a href="#top" data-nav="top"><span class="menu__n">00</span><span class="menu__t">Início</span></a>
+        <a href="#oficina" data-nav="oficina"><span class="menu__n">01</span><span class="menu__t">A oficina</span></a>
+        <a href="#bike" data-nav="bike"><span class="menu__n">02</span><span class="menu__t">Montagem</span></a>
+        <a href="#servicos" data-nav="servicos"><span class="menu__n">03</span><span class="menu__t">Serviços</span></a>
+        <a href="#modalidades" data-nav="modalidades"><span class="menu__n">04</span><span class="menu__t">Modalidades</span></a>
+        <a href="#processo" data-nav="processo"><span class="menu__n">05</span><span class="menu__t">Como funciona</span></a>
+        <a href="#galeria" data-nav="galeria"><span class="menu__n">06</span><span class="menu__t">Galeria</span></a>
+        <a href="#avaliacoes" data-nav="avaliacoes"><span class="menu__n">07</span><span class="menu__t">Avaliações</span></a>
+        <a href="#contato" data-nav="contato"><span class="menu__n">08</span><span class="menu__t">Contato</span></a>
       </nav>
       <aside class="menu__aside">
         <p class="kicker" data-cms="sections.menu.kicker"></p>
@@ -83,8 +84,8 @@
         <p class="muted"><span data-cms="brand.address"></span><br><span data-cms="brand.district"></span></p>
         <p class="muted" data-cms="brand.hours"></p>
         <div class="menu__actions">
-          <a class="btn btn--primary js-wa" href="#" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> WhatsApp</a>
-          <a class="btn btn--ghost js-ig" href="#" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ig"/></svg> Instagram</a>
+          <a class="btn btn--primary js-wa" href="#" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> <span data-cms="labels.whatsapp"></span></a>
+          <a class="btn btn--ghost js-ig" href="#" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ig"/></svg> <span data-cms="labels.instagram"></span></a>
         </div>
       </aside>
     </div>
@@ -92,15 +93,15 @@
 
   <!-- Navegação lateral por pontos -->
   <nav class="dots" id="dots" aria-label="Navegação por seção">
-    <a href="#top" data-label="Início"></a>
-    <a href="#oficina" data-label="Oficina"></a>
-    <a href="#bike" data-label="Montagem"></a>
-    <a href="#servicos" data-label="Serviços"></a>
-    <a href="#modalidades" data-label="Modalidades"></a>
-    <a href="#processo" data-label="Como funciona"></a>
-    <a href="#galeria" data-label="Galeria"></a>
-    <a href="#avaliacoes" data-label="Avaliações"></a>
-    <a href="#contato" data-label="Contato"></a>
+    <a href="#top" data-nav="top" data-label="Início"></a>
+    <a href="#oficina" data-nav="oficina" data-label="Oficina"></a>
+    <a href="#bike" data-nav="bike" data-label="Montagem"></a>
+    <a href="#servicos" data-nav="servicos" data-label="Serviços"></a>
+    <a href="#modalidades" data-nav="modalidades" data-label="Modalidades"></a>
+    <a href="#processo" data-nav="processo" data-label="Como funciona"></a>
+    <a href="#galeria" data-nav="galeria" data-label="Galeria"></a>
+    <a href="#avaliacoes" data-nav="avaliacoes" data-label="Avaliações"></a>
+    <a href="#contato" data-nav="contato" data-label="Contato"></a>
   </nav>
 
   <main id="top">
@@ -125,11 +126,11 @@
         </div>
         <ul class="hero__chips anim-in" id="heroChips" aria-label="Modalidades"></ul>
       </div>
-      <div class="hero__scroll" aria-hidden="true"><span>role</span><i></i></div>
+      <div class="hero__scroll" aria-hidden="true"><span data-cms="labels.scroll"></span><i></i></div>
     </section>
 
     <!-- MARQUEE -->
-    <section class="marquee" aria-label="Especialidades">
+    <section class="marquee" data-block="marquee" aria-label="Especialidades">
       <div class="marquee__track" id="marquee">
         <div class="marquee__row" id="marqueeRow"></div>
       </div>
@@ -173,7 +174,7 @@
             <h2 class="h2 bike__title" data-cms="sections.bike.title"></h2>
           </div>
           <ol class="bike__steps" id="bikeSteps"></ol>
-          <div class="bike__meter" aria-hidden="true"><span id="bikePct">0</span>%<small>montada</small></div>
+          <div class="bike__meter" aria-hidden="true"><span id="bikePct">0</span>%<small data-cms="labels.mounted"></small></div>
         </div>
       </div>
     </section>
@@ -245,10 +246,10 @@
           <div class="rating-card reveal" data-tilt="8">
             <svg class="rating-card__g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.5z"/></svg>
             <div class="rating-card__score"><strong data-cms="reviews.rating"></strong><span class="stars" id="ratingStars" aria-hidden="true"></span></div>
-            <p class="rating-card__count"><span data-cms="reviews.count"></span> avaliações no Google</p>
+            <p class="rating-card__count"><span data-cms="reviews.count"></span> <span data-cms="labels.reviewsCount"></span></p>
             <div class="rating-card__actions">
-              <a class="btn btn--primary btn--sm js-reviews" href="#" target="_blank" rel="noopener">Ver no Google</a>
-              <a class="btn btn--ghost btn--sm js-review-write" href="#" target="_blank" rel="noopener">Avaliar</a>
+              <a class="btn btn--primary btn--sm js-reviews" href="#" target="_blank" rel="noopener" data-cms="labels.seeGoogle"></a>
+              <a class="btn btn--ghost btn--sm js-review-write" href="#" target="_blank" rel="noopener" data-cms="labels.rateGoogle"></a>
             </div>
           </div>
         </header>
@@ -272,13 +273,13 @@
             <h2 class="h2" data-cms="sections.contact.title"></h2>
             <ul class="contact__list">
               <li><svg class="i" viewBox="0 0 24 24"><use href="#i-pin"/></svg><div><strong data-cms="brand.address"></strong><span data-cms="brand.district"></span></div></li>
-              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-wa"/></svg><div><a class="js-wa link" href="#" target="_blank" rel="noopener"><strong data-cms="brand.phoneLabel"></strong></a><span>WhatsApp</span></div></li>
-              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-clock"/></svg><div><strong>Horário</strong><span data-cms="brand.hours"></span></div></li>
-              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-ig"/></svg><div><a class="js-ig link" href="#" target="_blank" rel="noopener"><strong>@<span data-cms="brand.instagram"></span></strong></a><span>Instagram</span></div></li>
+              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-wa"/></svg><div><a class="js-wa link" href="#" target="_blank" rel="noopener"><strong data-cms="brand.phoneLabel"></strong></a><span data-cms="labels.whatsapp"></span></div></li>
+              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-clock"/></svg><div><strong data-cms="labels.hours"></strong><span data-cms="brand.hours"></span></div></li>
+              <li><svg class="i" viewBox="0 0 24 24"><use href="#i-ig"/></svg><div><a class="js-ig link" href="#" target="_blank" rel="noopener"><strong>@<span data-cms="brand.instagram"></span></strong></a><span data-cms="labels.instagram"></span></div></li>
             </ul>
             <div class="contact__actions">
-              <a class="btn btn--primary js-wa" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
-              <a class="btn btn--ghost js-maps" href="#" target="_blank" rel="noopener">Abrir no mapa</a>
+              <a class="btn btn--primary js-wa" href="#" target="_blank" rel="noopener" data-cms="labels.contactWhatsapp"></a>
+              <a class="btn btn--ghost js-maps" href="#" target="_blank" rel="noopener" data-cms="labels.contactMap"></a>
             </div>
           </div>
         </div>
@@ -308,9 +309,9 @@
         <div><strong data-cms="brand.name"></strong><span data-cms="brand.tagline"></span></div>
       </div>
       <nav class="footer__nav" aria-label="Rodapé">
-        <a href="#oficina">Oficina</a><a href="#servicos">Serviços</a><a href="#galeria">Galeria</a><a href="#avaliacoes">Avaliações</a><a href="#contato">Contato</a>
+        <a href="#oficina" data-nav="oficina">Oficina</a><a href="#servicos" data-nav="servicos">Serviços</a><a href="#galeria" data-nav="galeria">Galeria</a><a href="#avaliacoes" data-nav="avaliacoes">Avaliações</a><a href="#contato" data-nav="contato">Contato</a>
       </nav>
-      <p class="mono footer__copy">© <span id="year"></span> Duh Bike Point · São Paulo</p>
+      <p class="mono footer__copy">© <span id="year"></span> <span data-cms="footer.text"></span></p>
     </div>
   </footer>
 
@@ -385,15 +386,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="js/config.js?v=18"></script>
-  <script src="js/content.js?v=18"></script>
-  <script src="js/store.js?v=18"></script>
-  <script src="js/render.js?v=18"></script>
-  <script src="js/logo-data.js?v=18"></script>
-  <script src="js/hero3d.js?v=18"></script>
-  <script src="js/bike3d.js?v=18"></script>
-  <script src="js/effects.js?v=18"></script>
-  <script src="js/cms.js?v=18"></script>
-  <script src="js/app.js?v=18"></script>
+  <script src="js/config.js?v=19"></script>
+  <script src="js/content.js?v=19"></script>
+  <script src="js/store.js?v=19"></script>
+  <script src="js/render.js?v=19"></script>
+  <script src="js/logo-data.js?v=19"></script>
+  <script src="js/hero3d.js?v=19"></script>
+  <script src="js/bike3d.js?v=19"></script>
+  <script src="js/effects.js?v=19"></script>
+  <script src="js/cms.js?v=19"></script>
+  <script src="js/app.js?v=19"></script>
 </body>
 </html>

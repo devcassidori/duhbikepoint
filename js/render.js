@@ -26,7 +26,7 @@
 
   function waLink(msg) {
     const n = (Store.get('brand.whatsapp') || '').replace(/\D/g, '');
-    return `https://wa.me/${n}?text=${encodeURIComponent(msg || 'Olá! Vim pelo site da Duh Bike Point e gostaria de agendar um serviço.')}`;
+    return `https://wa.me/${n}?text=${encodeURIComponent(msg || Store.get('brand.waMessage') || 'Olá!')}`;
   }
 
   function renderBindings() {
@@ -54,6 +54,7 @@
         <div class="svc__icon">${icon(s.icon)}</div>
         <h3>${esc(s.title)}</h3>
         <p>${esc(s.text)}</p>
+        <a class="svc__cta" href="${waLink((Store.get('labels.serviceMessage') || '') + s.title)}" target="_blank" rel="noopener">${esc(Store.get('labels.serviceCta') || 'Pedir orçamento')} <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <span class="svc__glare"></span>
       </article></div>`).join('');
   }
@@ -153,11 +154,29 @@
     }
   }
 
+  // Rótulos do menu/navegação e seções ocultas pelo CMS
+  function renderNav() {
+    const labels = Store.get('labels.nav') || {}, vis = Store.get('visibility') || {};
+    Object.keys(vis).forEach((id) => {
+      if (vis[id] !== false) return;
+      const sec = document.getElementById(id) || $(`[data-block="${id}"]`);
+      if (sec) sec.remove();
+      $$(`a[data-nav="${id}"]`).forEach((a) => (a.closest('.footer__nav, .nav, .menu__nav, .dots') ? a.remove() : null));
+    });
+    $$('a[data-nav]').forEach((a) => {
+      const t = labels[a.dataset.nav]; if (!t) return;
+      if (a.closest('.dots')) { a.dataset.label = t; a.setAttribute('aria-label', t); return; }
+      const mt = a.querySelector('.menu__t'); if (mt) { mt.textContent = t; return; }
+      if (!a.children.length && (a.closest('.nav') || a.closest('.footer__nav'))) a.textContent = t;
+    });
+    $$('.menu__nav a').forEach((a, i) => { const n = a.querySelector('.menu__n'); if (n) n.textContent = String(i).padStart(2, '0'); });
+  }
+
   function renderAll() {
-    renderLists(); renderMeta();
+    renderNav(); renderLists(); renderMeta();
     renderBindings(); renderLinks(); renderServices(); renderDisciplines(); renderProcess(); renderGallery(); renderReviews();
     const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
   }
 
-  window.Render = { all: renderAll, bindings: renderBindings, links: renderLinks, meta: renderMeta, reviews: renderReviews, ICONS, esc };
+  window.Render = { waLink, all: renderAll, bindings: renderBindings, links: renderLinks, meta: renderMeta, reviews: renderReviews, ICONS, esc };
 })();
